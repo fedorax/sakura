@@ -1,0 +1,113 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container my-5">
+    <h1>Word App</h1>
+
+    <!-- 新規登録 -->
+    <div class="card my-4">
+      <div class="card-header">Register</div>
+      <div class="card-body">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerEmail">Email address</label>
+            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ログイン -->
+    <div class="card my-4">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email address</label>
+            <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 単語管理 -->
+    <div class="card my-4">
+      <div class="card-header">Words</div>
+      <div class="card-body">
+        <form id="wordForm">
+          <div class="form-group">
+            <label for="word">Word</label>
+            <input type="text" class="form-control" id="word" placeholder="Enter word">
+          </div>
+          <button type="submit" class="btn btn-primary">Add Word</button>
+        </form>
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Word</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="wordList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 例文管理 -->
+    <div class="card my-4">
+      <div class="card-header">Sentences</div>
+      <div class="card-body">
+        <form id="sentenceForm">
+          <div class="form-group">
+            <label for="wordSelect">Word</label>
+            <select class="form-control" id="wordSelect"></select>
+          </div>
+          <div class="form-group">
+            <label for="sentence">Sentence</label>
+            <input type="text" class="form-control" id="sentence" placeholder="Enter sentence">
+          </div>
+          <div class="form-group">
+            <label for="translation">Translation</label>
+            <input type="text" class="form-control" id="translation" placeholder="Enter translation">
+          </div>
+          <button type="submit" class="btn btn-primary">Add Sentence</button>
+        </form>
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Sentence</th>
+              <th scope="col">Translation</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sentenceList"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
