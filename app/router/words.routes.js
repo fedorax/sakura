@@ -25,13 +25,13 @@ module.exports = function (app) {
     });
 
     // 単語の新規登録
-    app.post('/api/words',  verifyController, async (_, res) => {
-        
+    app.post('/api/words',  verifyController, async (req, res) => {
+        const { word, translate } = req.body;
         try {
             const client = await pool.connect(); // プールからクライアントを取得
 
             try {
-                await client.query('INSERT INTO words (user_id, word) VALUES ($1, $2)', [req.user.id, word]);
+                await client.query('INSERT INTO words (user_id, word, translate) VALUES ($1, $2)', [req.user.id, word, translate]);
                 res.status(201).json({ message: 'Word registered successfully' });
             } catch (error) {
                 console.error(error);
@@ -48,13 +48,13 @@ module.exports = function (app) {
     // 単語の編集
     app.put('/api/words/:id', verifyController, async (req, res) => {
         const { id } = req.params;
-        const { word } = req.body;
+        const { word, translate } = req.body;
         
         try {
             const client = await pool.connect(); // プールからクライアントを取得
 
             try {
-                await client.query('UPDATE words SET user_id = $1, word = $2 WHERE id = $3', [req.user.id, word, id]);
+                await client.query('UPDATE words SET user_id = $1, word = $2, translate = $3 WHERE id = $4', [req.user.id, word, translate, id]);
                 res.status(200).json({ message: 'Word updated successfully' });
             } catch (error) {
                 console.error(error);

@@ -65,8 +65,9 @@ const wordForm = document.getElementById('wordForm');
 wordForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const word = document.getElementById('word').value;
+  const translate = document.getElementById('translate').value;
   try {
-    await makeRequest('/api/words', 'POST', { word }); // ユーザーIDは仮置き
+    await makeRequest('/api/words', 'POST', { word, translate }); // ユーザーIDは仮置き
     alert('Word registered successfully');
     // 単語一覧の更新
     await loadWords();
@@ -98,6 +99,7 @@ async function loadWords() {
       row.innerHTML = `
           <th scope="row">${index + 1}</th>
           <td>${word.word}</td>
+          <td>${word.translate}</td>
           <td>
             <button class="btn btn-primary btn-sm mr-2 editWord" data-id="${word.id}">Edit</button>
             <button class="btn btn-danger btn-sm deleteWord" data-id="${word.id}">Delete</button>
@@ -121,8 +123,9 @@ document.addEventListener('click', async (event) => {
   if (event.target.classList.contains('editWord')) {
     const wordId = event.target.dataset.id;
     const newWord = prompt('Enter new word');
+    const newTranslate = prompt('Enter new translate');
     try {
-      await makeRequest(`/api/words/${wordId}`, 'PUT', { word: newWord });
+      await makeRequest(`/api/words/${wordId}`, 'PUT', { word: newWord, translate: newTranslate });
       alert('Word updated successfully');
       await loadWords();
     } catch (error) {
@@ -195,7 +198,7 @@ document.addEventListener('click', async (event) => {
   if (event.target.classList.contains('editSentence')) {
     const sentenceId = event.target.dataset.id;
     const newSentence = prompt('Enter new Sentence');
-    const newTranslate = prompt('Enter new Sentence');
+    const newTranslate = prompt('Enter new Translate');
     try {
       await makeRequest(`/api/sentences/${sentenceId}`, 'PUT', { sentence: newSentence, translation: newTranslate });
       alert('Sentence updated successfully');
