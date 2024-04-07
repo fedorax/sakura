@@ -38,7 +38,7 @@ registerForm.addEventListener('submit', async (event) => {
   const password = document.getElementById('registerPassword').value;
   try {
     await makeRequest('/register', 'POST', { email, password });
-    alert('Registration successful');
+    console.log('Registration successful');
   } catch (error) {
     alert(`Registration failed: ${error.error}`);
   }
@@ -54,7 +54,8 @@ loginForm.addEventListener('submit', async (event) => {
     const { accessToken } = await makeRequest('/login', 'POST', { email, password });
     localStorage.setItem('accessToken', accessToken); // トークンをlocalStorageに保存
 
-    alert('Login successful');
+    console.log('Login successful');
+    location.reload();
   } catch (error) {
     alert(`Login failed: ${error.error}`);
   }
@@ -68,9 +69,8 @@ wordForm.addEventListener('submit', async (event) => {
   const translate = document.getElementById('translate').value;
   try {
     await makeRequest('/api/words', 'POST', { word, translate }); // ユーザーIDは仮置き
-    alert('Word registered successfully');
-    // 単語一覧の更新
-    await loadWords();
+    console.log('Word registered successfully');
+    location.reload();
   } catch (error) {
     alert(`Word registration failed: ${error.error}`);
   }
@@ -126,8 +126,8 @@ document.addEventListener('click', async (event) => {
     const newTranslate = prompt('Enter new translate');
     try {
       await makeRequest(`/api/words/${wordId}`, 'PUT', { word: newWord, translate: newTranslate });
-      alert('Word updated successfully');
-      await loadWords();
+      console.log('Word updated successfully');
+      location.reload();
     } catch (error) {
       alert(`Failed to update word: ${error.error}`);
     }
@@ -140,8 +140,8 @@ document.addEventListener('click', async (event) => {
     const wordId = event.target.dataset.id;
     try {
       await makeRequest(`/api/words/${wordId}`, 'DELETE');
-      alert('Word deleted successfully');
-      await loadWords();
+      console.log('Word deleted successfully');
+      location.reload();
     } catch (error) {
       alert(`Failed to delete word: ${error.error}`);
     }
@@ -157,9 +157,8 @@ sentenceForm.addEventListener('submit', async (event) => {
   const translation = document.getElementById('translation').value;
   try {
     await makeRequest('/api/sentences', 'POST', { wordId, sentence, translation });
-    alert('Sentence registered successfully');
-    // 例文一覧の更新
-    await loadSentences();
+    console.log('Sentence registered successfully');
+    location.reload();
   } catch (error) {
     alert(`Sentence registration failed: ${error.error}`);
   }
@@ -201,8 +200,8 @@ document.addEventListener('click', async (event) => {
     const newTranslate = prompt('Enter new Translate');
     try {
       await makeRequest(`/api/sentences/${sentenceId}`, 'PUT', { sentence: newSentence, translation: newTranslate });
-      alert('Sentence updated successfully');
-      await loadSentences();
+      console.log('Sentence updated successfully');
+      location.reload();
     } catch (error) {
       alert(`Failed to update word: ${error.error}`);
     }
@@ -215,8 +214,8 @@ document.addEventListener('click', async (event) => {
     const sentenceId = event.target.dataset.id;
     try {
       await makeRequest(`/api/sentences/${sentenceId}`, 'DELETE');
-      alert('Sentence deleted successfully');
-      await loadSentences();
+      console.log('Sentence deleted successfully');
+      location.reload();
     } catch (error) {
       alert(`Failed to delete word: ${error.error}`);
     }
