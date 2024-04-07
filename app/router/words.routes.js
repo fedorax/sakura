@@ -31,7 +31,7 @@ module.exports = function (app) {
             const client = await pool.connect(); // プールからクライアントを取得
 
             try {
-                await client.query('INSERT INTO words (user_id, word, translate) VALUES ($1, $2)', [req.user.id, word, translate]);
+                await client.query('INSERT INTO words (user_id, word, translate) VALUES ($1, $2, $3)', [req.user.id, word, translate]);
                 res.status(201).json({ message: 'Word registered successfully' });
             } catch (error) {
                 console.error(error);
