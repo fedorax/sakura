@@ -18,7 +18,7 @@ require('./middleware/routes')(app);
 app.listen(port);
 
 // Log the server status to the console
-console.log('Server running at http://localhost:/' + port);
+console.log('Server running at http://localhost:' + port);
 
 // Use the module.exports property to expose our Express application instance for external usage
 module.exports = app;
