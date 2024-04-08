@@ -8,7 +8,7 @@ module.exports = function (app) {
             const client = await pool.connect(); // プールからクライアントを取得
 
             try {
-                const result = await client.query('SELECT * FROM sentences');
+                const result = await client.query('SELECT * FROM sentences order by id');
                 res.status(200).json(result.rows);
             } catch (error) {
                 console.error(error);
