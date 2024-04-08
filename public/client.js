@@ -102,6 +102,7 @@ async function loadWords() {
           <td>${word.translate}</td>
           <td>${word.sentence}</td>
           <td>
+            <button class="btn btn-success btn-sm mr-2 addSentence" data-id="${word.id}">Sentence</button>
             <button class="btn btn-primary btn-sm mr-2 editWord" data-id="${word.id}">Edit</button>
             <button class="btn btn-danger btn-sm deleteWord" data-id="${word.id}">Delete</button>
           </td>
@@ -148,7 +149,19 @@ document.addEventListener('click', async (event) => {
     }
   }
 });
-
+// 例文の選択
+document.addEventListener('click', async (event) => {
+  if (event.target.classList.contains('addSentence')) {
+    const wordId = event.target.dataset.id;
+    const wordSelect = document.getElementById('wordSelect');
+    for(var i = 0; i < wordSelect.options.length; i++){
+      if(wordSelect.options[i].value == wordId){
+        wordSelect.selectIndex = i;
+        break;
+      }
+    }
+  }
+});
 // 例文の登録
 const sentenceForm = document.getElementById('sentenceForm');
 sentenceForm.addEventListener('submit', async (event) => {
