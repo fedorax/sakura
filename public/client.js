@@ -161,6 +161,7 @@ document.addEventListener('click', async (event) => {
         wordSelect.options[i].removeAttribute("selected");
       }
     }
+    document.getElementById('sentence').focus();
   }
 });
 // 例文の登録
