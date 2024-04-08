@@ -10,7 +10,7 @@ module.exports = function (app) {
             const client = await pool.connect(); // プールからクライアントを取得
 
             try {
-                const result = await client.query('SELECT * FROM words order by id');
+                const result = await client.query('select w.id, w.word AS word, w.translate, COUNT(s.word_id) AS sentence FROM words w LEFT JOIN sentences s ON w.id = s.word_id GROUP BY w.id, w.word, w.translate ORDER BY w.id');
                 res.status(200).json(result.rows);
             } catch (error) {
                 console.error(error);

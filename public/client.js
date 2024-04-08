@@ -100,6 +100,7 @@ async function loadWords() {
           <th scope="row">${index + 1}</th>
           <td>${word.word}</td>
           <td>${word.translate}</td>
+          <td>${word.sentence}</td>
           <td>
             <button class="btn btn-primary btn-sm mr-2 editWord" data-id="${word.id}">Edit</button>
             <button class="btn btn-danger btn-sm deleteWord" data-id="${word.id}">Delete</button>
