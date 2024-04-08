@@ -156,8 +156,9 @@ document.addEventListener('click', async (event) => {
     const wordSelect = document.getElementById('wordSelect');
     for(var i = 0; i < wordSelect.options.length; i++){
       if(wordSelect.options[i].value == wordId){
-        wordSelect.selectIndex = i;
-        break;
+        wordSelect.options[i].setAttribute("selected", "selected");
+      } else {
+        wordSelect.options[i].removeAttribute("selected");
       }
     }
   }
