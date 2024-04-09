@@ -87,4 +87,34 @@ module.exports = function (app) {
             res.status(500).json('Failed to connect to the database ');
         }
     });
+
+    app.get('/api/sentences/train/:lang', verifyController, async (req, res) => {
+        const { lang } = req.params;
+
+        try {
+            const client = await pool.connect();
+
+            try {
+                const ret = await pool.query('SELECT * FROM sentences ORDER BY RANDOM() LIMIT 1;');
+                const data = lang === 'en' ? {
+                    question: ret.rows[0].sentence,
+                    answer: ret.rows[0].translation,
+                    hint : ret.rows[0].translation
+                } : {
+                    question: ret.rows[0].translation,
+                    answer: ret.rows[0].sentence,
+                    hint : ret.rows[0].sentence
+                };
+                res.status(200).json(data);
+            } catch (error) {
+                console.error(error);
+                res.status(400).json({ error: err.message });
+            } finally {
+                client.release();
+            }
+        } catch (err) {
+            console.error('Database connection error:', err);
+            res.sta
+        }
+    });
 }
